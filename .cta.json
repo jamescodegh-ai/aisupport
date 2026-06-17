@@ -1,0 +1,29 @@
+{
+  "projectName": "aisupport",
+  "mode": "file-router",
+  "typescript": true,
+  "packageManager": "npm",
+  "includeExamples": true,
+  "tailwind": true,
+  "addOnOptions": {
+    "drizzle": {
+      "database": "postgresql"
+    }
+  },
+  "envVarValues": {},
+  "git": true,
+  "install": true,
+  "routerOnly": false,
+  "version": 1,
+  "framework": "react",
+  "chosenAddOns": [
+    "eslint",
+    "railway",
+    "sentry",
+    "db",
+    "shadcn",
+    "t3env",
+    "tanstack-query",
+    "drizzle"
+  ]
+}
