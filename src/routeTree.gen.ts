@@ -9,17 +9,34 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AboutRouteImport } from './routes/about'
+import { Route as TestRouteImport } from './routes/test'
+import { Route as KnowledgeRouteImport } from './routes/knowledge'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as DemoTanstackQueryRouteImport } from './routes/demo/tanstack-query'
-import { Route as DemoDrizzleRouteImport } from './routes/demo/drizzle'
-import { Route as DemoDbChatApiRouteImport } from './routes/demo/db-chat-api'
-import { Route as DemoDbChatRouteImport } from './routes/demo/db-chat'
-import { Route as DemoSentryTestingRouteImport } from './routes/demo/sentry.testing'
+import { Route as ApiWidgetjsRouteImport } from './routes/api/widgetjs'
+import { Route as ApiPushRouteImport } from './routes/api/push'
+import { Route as ApiPublicWidgetRouteImport } from './routes/api/public/widget'
+import { Route as ApiPublicRespondRouteImport } from './routes/api/public/respond'
 
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
+const TestRoute = TestRouteImport.update({
+  id: '/test',
+  path: '/test',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KnowledgeRoute = KnowledgeRouteImport.update({
+  id: '/knowledge',
+  path: '/knowledge',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -27,107 +44,137 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
-  id: '/demo/tanstack-query',
-  path: '/demo/tanstack-query',
+const ApiWidgetjsRoute = ApiWidgetjsRouteImport.update({
+  id: '/api/widgetjs',
+  path: '/api/widgetjs',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DemoDrizzleRoute = DemoDrizzleRouteImport.update({
-  id: '/demo/drizzle',
-  path: '/demo/drizzle',
+const ApiPushRoute = ApiPushRouteImport.update({
+  id: '/api/push',
+  path: '/api/push',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DemoDbChatApiRoute = DemoDbChatApiRouteImport.update({
-  id: '/demo/db-chat-api',
-  path: '/demo/db-chat-api',
+const ApiPublicWidgetRoute = ApiPublicWidgetRouteImport.update({
+  id: '/api/public/widget',
+  path: '/api/public/widget',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DemoDbChatRoute = DemoDbChatRouteImport.update({
-  id: '/demo/db-chat',
-  path: '/demo/db-chat',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoSentryTestingRoute = DemoSentryTestingRouteImport.update({
-  id: '/demo/sentry/testing',
-  path: '/demo/sentry/testing',
+const ApiPublicRespondRoute = ApiPublicRespondRouteImport.update({
+  id: '/api/public/respond',
+  path: '/api/public/respond',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/demo/db-chat': typeof DemoDbChatRoute
-  '/demo/db-chat-api': typeof DemoDbChatApiRoute
-  '/demo/drizzle': typeof DemoDrizzleRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
-  '/demo/sentry/testing': typeof DemoSentryTestingRoute
+  '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
+  '/knowledge': typeof KnowledgeRoute
+  '/test': typeof TestRoute
+  '/api/push': typeof ApiPushRoute
+  '/api/widgetjs': typeof ApiWidgetjsRoute
+  '/api/public/respond': typeof ApiPublicRespondRoute
+  '/api/public/widget': typeof ApiPublicWidgetRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/demo/db-chat': typeof DemoDbChatRoute
-  '/demo/db-chat-api': typeof DemoDbChatApiRoute
-  '/demo/drizzle': typeof DemoDrizzleRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
-  '/demo/sentry/testing': typeof DemoSentryTestingRoute
+  '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
+  '/knowledge': typeof KnowledgeRoute
+  '/test': typeof TestRoute
+  '/api/push': typeof ApiPushRoute
+  '/api/widgetjs': typeof ApiWidgetjsRoute
+  '/api/public/respond': typeof ApiPublicRespondRoute
+  '/api/public/widget': typeof ApiPublicWidgetRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/demo/db-chat': typeof DemoDbChatRoute
-  '/demo/db-chat-api': typeof DemoDbChatApiRoute
-  '/demo/drizzle': typeof DemoDrizzleRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
-  '/demo/sentry/testing': typeof DemoSentryTestingRoute
+  '/auth': typeof AuthRoute
+  '/dashboard': typeof DashboardRoute
+  '/knowledge': typeof KnowledgeRoute
+  '/test': typeof TestRoute
+  '/api/push': typeof ApiPushRoute
+  '/api/widgetjs': typeof ApiWidgetjsRoute
+  '/api/public/respond': typeof ApiPublicRespondRoute
+  '/api/public/widget': typeof ApiPublicWidgetRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/about'
-    | '/demo/db-chat'
-    | '/demo/db-chat-api'
-    | '/demo/drizzle'
-    | '/demo/tanstack-query'
-    | '/demo/sentry/testing'
+    | '/auth'
+    | '/dashboard'
+    | '/knowledge'
+    | '/test'
+    | '/api/push'
+    | '/api/widgetjs'
+    | '/api/public/respond'
+    | '/api/public/widget'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/about'
-    | '/demo/db-chat'
-    | '/demo/db-chat-api'
-    | '/demo/drizzle'
-    | '/demo/tanstack-query'
-    | '/demo/sentry/testing'
+    | '/auth'
+    | '/dashboard'
+    | '/knowledge'
+    | '/test'
+    | '/api/push'
+    | '/api/widgetjs'
+    | '/api/public/respond'
+    | '/api/public/widget'
   id:
     | '__root__'
     | '/'
-    | '/about'
-    | '/demo/db-chat'
-    | '/demo/db-chat-api'
-    | '/demo/drizzle'
-    | '/demo/tanstack-query'
-    | '/demo/sentry/testing'
+    | '/auth'
+    | '/dashboard'
+    | '/knowledge'
+    | '/test'
+    | '/api/push'
+    | '/api/widgetjs'
+    | '/api/public/respond'
+    | '/api/public/widget'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
-  DemoDbChatRoute: typeof DemoDbChatRoute
-  DemoDbChatApiRoute: typeof DemoDbChatApiRoute
-  DemoDrizzleRoute: typeof DemoDrizzleRoute
-  DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
-  DemoSentryTestingRoute: typeof DemoSentryTestingRoute
+  AuthRoute: typeof AuthRoute
+  DashboardRoute: typeof DashboardRoute
+  KnowledgeRoute: typeof KnowledgeRoute
+  TestRoute: typeof TestRoute
+  ApiPushRoute: typeof ApiPushRoute
+  ApiWidgetjsRoute: typeof ApiWidgetjsRoute
+  ApiPublicRespondRoute: typeof ApiPublicRespondRoute
+  ApiPublicWidgetRoute: typeof ApiPublicWidgetRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
+    '/test': {
+      id: '/test'
+      path: '/test'
+      fullPath: '/test'
+      preLoaderRoute: typeof TestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge': {
+      id: '/knowledge'
+      path: '/knowledge'
+      fullPath: '/knowledge'
+      preLoaderRoute: typeof KnowledgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -137,39 +184,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/demo/tanstack-query': {
-      id: '/demo/tanstack-query'
-      path: '/demo/tanstack-query'
-      fullPath: '/demo/tanstack-query'
-      preLoaderRoute: typeof DemoTanstackQueryRouteImport
+    '/api/widgetjs': {
+      id: '/api/widgetjs'
+      path: '/api/widgetjs'
+      fullPath: '/api/widgetjs'
+      preLoaderRoute: typeof ApiWidgetjsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/demo/drizzle': {
-      id: '/demo/drizzle'
-      path: '/demo/drizzle'
-      fullPath: '/demo/drizzle'
-      preLoaderRoute: typeof DemoDrizzleRouteImport
+    '/api/push': {
+      id: '/api/push'
+      path: '/api/push'
+      fullPath: '/api/push'
+      preLoaderRoute: typeof ApiPushRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/demo/db-chat-api': {
-      id: '/demo/db-chat-api'
-      path: '/demo/db-chat-api'
-      fullPath: '/demo/db-chat-api'
-      preLoaderRoute: typeof DemoDbChatApiRouteImport
+    '/api/public/widget': {
+      id: '/api/public/widget'
+      path: '/api/public/widget'
+      fullPath: '/api/public/widget'
+      preLoaderRoute: typeof ApiPublicWidgetRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/demo/db-chat': {
-      id: '/demo/db-chat'
-      path: '/demo/db-chat'
-      fullPath: '/demo/db-chat'
-      preLoaderRoute: typeof DemoDbChatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo/sentry/testing': {
-      id: '/demo/sentry/testing'
-      path: '/demo/sentry/testing'
-      fullPath: '/demo/sentry/testing'
-      preLoaderRoute: typeof DemoSentryTestingRouteImport
+    '/api/public/respond': {
+      id: '/api/public/respond'
+      path: '/api/public/respond'
+      fullPath: '/api/public/respond'
+      preLoaderRoute: typeof ApiPublicRespondRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -177,12 +217,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
-  DemoDbChatRoute: DemoDbChatRoute,
-  DemoDbChatApiRoute: DemoDbChatApiRoute,
-  DemoDrizzleRoute: DemoDrizzleRoute,
-  DemoTanstackQueryRoute: DemoTanstackQueryRoute,
-  DemoSentryTestingRoute: DemoSentryTestingRoute,
+  AuthRoute: AuthRoute,
+  DashboardRoute: DashboardRoute,
+  KnowledgeRoute: KnowledgeRoute,
+  TestRoute: TestRoute,
+  ApiPushRoute: ApiPushRoute,
+  ApiWidgetjsRoute: ApiWidgetjsRoute,
+  ApiPublicRespondRoute: ApiPublicRespondRoute,
+  ApiPublicWidgetRoute: ApiPublicWidgetRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
