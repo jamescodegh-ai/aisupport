@@ -152,6 +152,7 @@ export const Route = createFileRoute("/api/public/widget")({
 
           // ── IP extraction: prefer real visitor IP headers ──
           const ip =
+            request.headers.get("x-vercel-forwarded-for") ??
             request.headers.get("cf-connecting-ip") ||
             request.headers.get("x-real-ip") ||
             request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
