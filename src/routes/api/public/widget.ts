@@ -205,8 +205,7 @@ export const Route = createFileRoute("/api/public/widget")({
                 screen_height: body.screen_height,
                 // UTM
                 ...utms,
-                // Returning visitor check — false for brand new session
-                is_returning: false,
+                // is_returning defaults to false in DB
               }).select().single();
 
               if (ins.error) throw new Error(ins.error.message);
