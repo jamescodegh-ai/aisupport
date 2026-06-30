@@ -1,10 +1,26 @@
 (function(){
   if (window.__wolvChat) return;
   window.__wolvChat = true;
-  var API = window.location.origin;
-  var SCRIPT = document.currentScript || (function(){ var s=document.getElementsByTagName('script'); for (var i=s.length-1;i>=0;i--){ if ((s[i].src||'').indexOf('widget.js')>-1) return s[i]; } return null; })();
-  var SITE = (SCRIPT && (SCRIPT.getAttribute('data-site') || SCRIPT.getAttribute('data-site-id'))) || (window.__wolvChatSite) || '';
-  var SS_KEY = 'wolv_session_id_' + (SITE || 'default');
+
+  var SCRIPT = document.currentScript || (function () {
+    var s = document.getElementsByTagName("script");
+    for (var i = s.length - 1; i >= 0; i--) {
+      if ((s[i].src || "").indexOf("widget") > -1) return s[i];
+    }
+    return null;
+  })();
+
+  // API server is wherever widget.js was loaded from
+  var API = SCRIPT ? new URL(SCRIPT.src).origin : window.location.origin;
+
+  var SITE =
+    (SCRIPT &&
+      (SCRIPT.getAttribute("data-site") ||
+        SCRIPT.getAttribute("data-site-id"))) ||
+    window.__wolvChatSite ||
+    "";
+
+  var SS_KEY = "wolv_session_id_" + (SITE || "default");
   var sid = localStorage.getItem(SS_KEY);
   if (!sid) { sid = 'wv_' + Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem(SS_KEY, sid); }
 

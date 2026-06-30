@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WidgetDotjsRouteImport } from './routes/widget[.]js'
 import { Route as TestRouteImport } from './routes/test'
 import { Route as KnowledgeRouteImport } from './routes/knowledge'
 import { Route as DashboardRouteImport } from './routes/dashboard'
@@ -19,6 +20,11 @@ import { Route as ApiPushRouteImport } from './routes/api/push'
 import { Route as ApiPublicWidgetRouteImport } from './routes/api/public/widget'
 import { Route as ApiPublicRespondRouteImport } from './routes/api/public/respond'
 
+const WidgetDotjsRoute = WidgetDotjsRouteImport.update({
+  id: '/widget.js',
+  path: '/widget.js',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TestRoute = TestRouteImport.update({
   id: '/test',
   path: '/test',
@@ -71,6 +77,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/knowledge': typeof KnowledgeRoute
   '/test': typeof TestRoute
+  '/widget.js': typeof WidgetDotjsRoute
   '/api/push': typeof ApiPushRoute
   '/api/widgetjs': typeof ApiWidgetjsRoute
   '/api/public/respond': typeof ApiPublicRespondRoute
@@ -82,6 +89,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/knowledge': typeof KnowledgeRoute
   '/test': typeof TestRoute
+  '/widget.js': typeof WidgetDotjsRoute
   '/api/push': typeof ApiPushRoute
   '/api/widgetjs': typeof ApiWidgetjsRoute
   '/api/public/respond': typeof ApiPublicRespondRoute
@@ -94,6 +102,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/knowledge': typeof KnowledgeRoute
   '/test': typeof TestRoute
+  '/widget.js': typeof WidgetDotjsRoute
   '/api/push': typeof ApiPushRoute
   '/api/widgetjs': typeof ApiWidgetjsRoute
   '/api/public/respond': typeof ApiPublicRespondRoute
@@ -107,6 +116,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/knowledge'
     | '/test'
+    | '/widget.js'
     | '/api/push'
     | '/api/widgetjs'
     | '/api/public/respond'
@@ -118,6 +128,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/knowledge'
     | '/test'
+    | '/widget.js'
     | '/api/push'
     | '/api/widgetjs'
     | '/api/public/respond'
@@ -129,6 +140,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/knowledge'
     | '/test'
+    | '/widget.js'
     | '/api/push'
     | '/api/widgetjs'
     | '/api/public/respond'
@@ -141,6 +153,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   KnowledgeRoute: typeof KnowledgeRoute
   TestRoute: typeof TestRoute
+  WidgetDotjsRoute: typeof WidgetDotjsRoute
   ApiPushRoute: typeof ApiPushRoute
   ApiWidgetjsRoute: typeof ApiWidgetjsRoute
   ApiPublicRespondRoute: typeof ApiPublicRespondRoute
@@ -149,6 +162,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/widget.js': {
+      id: '/widget.js'
+      path: '/widget.js'
+      fullPath: '/widget.js'
+      preLoaderRoute: typeof WidgetDotjsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/test': {
       id: '/test'
       path: '/test'
@@ -221,6 +241,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   KnowledgeRoute: KnowledgeRoute,
   TestRoute: TestRoute,
+  WidgetDotjsRoute: WidgetDotjsRoute,
   ApiPushRoute: ApiPushRoute,
   ApiWidgetjsRoute: ApiWidgetjsRoute,
   ApiPublicRespondRoute: ApiPublicRespondRoute,
