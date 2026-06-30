@@ -19,6 +19,7 @@ function buildWidgetSource(apiBase: string): string {
   if (!sid) { sid = 'wv_' + Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem(SS_KEY, sid); }
 
   var host = document.createElement('div');
+  if (location.hostname === 'ai.wolvcapital.com') return;
   host.id = 'wolv-chat-root';
   host.style.cssText = 'position:fixed;bottom:20px;right:20px;z-index:2147483647;';
   document.body.appendChild(host);
