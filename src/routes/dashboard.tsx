@@ -56,7 +56,20 @@ function Dashboard() {
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       if (!data.session) navigate({ to: "/auth" });
-      else { setAuthed(true); setAuthToken(data.session.access_token); }
+      else {
+        const token = data.session.access_token;
+        setAuthed(true); setAuthToken(token);
+        const origFetch = window.__wolvOrigFetch || window.fetch;
+        window.__wolvOrigFetch = origFetch;
+        window.fetch = function(input, init) {
+          const url = typeof input === 'string' ? input : input instanceof URL ? input.toString() : (input as Request).url;
+          if (url.includes('/_serverFn/')) {
+            init = init || {};
+            init.headers = Object.assign({}, init.headers, { 'Authorization': 'Bearer ' + token });
+          }
+          return origFetch.call(this, input, init);
+        };
+      }
     });
   }, [navigate]);
 

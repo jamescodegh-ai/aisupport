@@ -14,6 +14,7 @@ type Site = { id: string; slug: string; name: string; domain: string | null };
 function KB() {
   const navigate = useNavigate();
   const [authed, setAuthed] = useState(false);
+  const [authToken, setAuthToken] = useState<string | null>(null);
   const [sites, setSites] = useState<Site[]>([]);
   const [siteSlug, setSiteSlug] = useState<string>("wolvcapital");
   const [url, setUrl] = useState("https://wolvcapital.com");
@@ -38,7 +39,21 @@ function KB() {
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       if (!data.session) navigate({ to: "/auth" });
-      else setAuthed(true);
+      else {
+        const token = data.session.access_token;
+        setAuthToken(token);
+        setAuthed(true);
+        const origFetch = window.__wolvOrigFetch || window.fetch;
+        window.__wolvOrigFetch = origFetch;
+        window.fetch = function(input, init) {
+          const url = typeof input === 'string' ? input : input instanceof URL ? input.toString() : (input as Request).url;
+          if (url.includes('/_serverFn/')) {
+            init = init || {};
+            init.headers = Object.assign({}, init.headers, { 'Authorization': 'Bearer ' + token });
+          }
+          return origFetch.call(this, input, init);
+        };
+      }
     });
   }, [navigate]);
 
